@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">SEO Test - Zobrazení HTML zdrojového kódu</h1>
+
+    <div class="bg-gray-900 p-4 rounded">
+      <h2 class="text-xl font-semibold mb-4">Pokyny pro testování SEO:</h2>
+
+      <ol class="list-decimal list-inside space-y-2 mb-6">
+        <li>Otevřete hlavní stránku webu v prohlížeči</li>
+        <li>Klikněte pravým tlačítkem a vyberte "Zobrazit zdrojový kód" (Ctrl+U)</li>
+        <li>Vyhledejte text "Na čem se domluvíme" (Ctrl+F)</li>
+        <li>Pokud najdete všech 6 karet s obsahem ve zdrojovém HTML = SEO je OK ✅</li>
+        <li>Zkontrolujte také, že karty mají správné HTML tagy (h3, p, article)</li>
+      </ol>
+
+      <h3 class="text-lg font-semibold mb-2">Co by mělo být vidět ve zdrojovém kódu:</h3>
+      <ul class="list-disc list-inside space-y-1">
+        <li>&lt;article&gt; tag s itemscope a itemtype pro strukturovaná data</li>
+        <li>&lt;i class="fa-solid fa-xxx"&gt; FontAwesome ikony nad každým nadpisem</li>
+        <li>&lt;h3&gt; nadpisy s itemprop="headline"</li>
+        <li>&lt;p&gt; popisy s itemprop="description"</li>
+        <li>Všech 6 karet s kompletním obsahem</li>
+      </ul>
+
+      <h3 class="text-lg font-semibold mb-2 mt-4">FontAwesome ikony v kartách:</h3>
+      <ul class="list-disc list-inside space-y-1">
+        <li>🤝 fa-handshake - "Na čem se domluvíme, to platí"</li>
+        <li>👁️ fa-eye - "Jednám na rovinu"</li>
+        <li>⏰ fa-clock - "Téměř non-stop dostupnost"</li>
+        <li>💡 fa-lightbulb - "'Nejde' v mém slovníku nehledejte"</li>
+        <li>👥 fa-users - "Rád se s vámi potkám"</li>
+        <li>💬 fa-comments - "Mluvím srozumitelně"</li>
+      </ul>
+
+      <h3 class="text-lg font-semibold mb-2 mt-4">Testování animací:</h3>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Najeďte myší na karty - měly by se objevit částice</li>
+        <li>Pohybujte myší - měl by fungovat spotlight efekt</li>
+        <li>Klikněte na kartu - měl by se zobrazit ripple efekt</li>
+        <li>Karty by se měly naklánět při hoveru (tilt efekt)</li>
+      </ul>
+    </div>
+
+    <div class="mt-8">
+      <a href="/" class="text-blue-400 hover:text-blue-300">← Zpět na hlavní stránku</a>
+    </div>
+  </div>
+</Layout>

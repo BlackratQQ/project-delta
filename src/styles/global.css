@@ -1,0 +1,1335 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --d: 700ms;
+  --e: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #030811;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  background-image: url('/Textura-bg.webp');
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: top left;
+  background-attachment: scroll;
+  line-height: 1.6;
+}
+
+/* Laser line efekt */
+.laser-line {
+  position: relative;
+}
+
+.laser-line::before {
+  content: '';
+  position: absolute;
+  top: var(--line-top, 50%);
+  left: var(--line-left-override, calc(-1 * (var(--line-width, 100%) - 100%) / 2));
+  width: var(--line-width, 100%);
+  height: 4px;
+  background-color: #f97316;
+  transform: translateY(-50%) rotate(var(--line-rotate, 0deg));
+  pointer-events: none;
+  z-index: -1;
+  box-shadow:
+    0 0 10px #f97316,
+    0 0 20px #f97316,
+    0 0 40px rgba(249, 115, 22, 1),
+    0 0 60px rgba(249, 115, 22, 1);
+}
+
+/* Strikethrough efekt pro nadpisy */
+.strikethrough-lower {
+  position: relative;
+  display: inline-block;
+}
+
+.strikethrough-lower::after {
+  content: '';
+  position: absolute;
+  left: -1%;
+  right: -5%;
+  height: 3px;
+  top: 50%;
+  background-color: #fff;
+  transform-origin: center;
+  box-shadow:
+    0 0 10px rgb(255, 255, 255),
+    0 0 20px rgba(255, 255, 255, 1),
+    0 0 40px rgba(255, 255, 255, 1),
+    0 0 60px rgba(255, 255, 255, 0.8),
+    0 0 80px rgba(255, 255, 255, 0.6);
+}
+
+/* Ghost button styly */
+.ghost-button-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.ghost-button-container button,
+.ghost-button-container a {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  background: #f97316;
+  -webkit-mask: url('/urban-sprite-reverse.webp');
+  mask: url('/urban-sprite-reverse.webp');
+  -webkit-mask-size: 3000% 100%;
+  mask-size: 3000% 100%;
+  color: #fff;
+  -webkit-animation: ani2 0.7s steps(29) forwards;
+  animation: ani2 0.7s steps(29) forwards;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.ghost-button-container button:hover,
+.ghost-button-container a:hover,
+.ghost-button-container.active button,
+.ghost-button-container.active a {
+  -webkit-animation: ani 0.7s steps(29) forwards;
+  animation: ani 0.7s steps(29) forwards;
+}
+
+.ghost-mas {
+  position: absolute;
+  color: #fff;
+  width: 100%;
+  overflow: hidden;
+  font-weight: bold;
+  border: 1px solid #f97316;
+  padding: 12px 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Keyframes pro mask animace */
+@-webkit-keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@-webkit-keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+@keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+/* Gradient layers pro Hero sekce */
+.bg-radial-gradient {
+  background-image: linear-gradient(
+    #030811,
+    #0a111b,
+    #0e1724,
+    #111c2d,
+    #132237,
+    #172d4c,
+    #1c3961,
+    #284d76,
+    #4176a0,
+    #73a0b0,
+    #ecffff
+  );
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bottom-black-layer {
+  background-color: #010308; /* Barva vrstvy */
+  clip-path: polygon(
+    100% 100%,
+    0% 100%,
+    0% 1.75%,
+    2.22% 1.97%,
+    4.44% 2.62%,
+    6.67% 3.7%,
+    8.89% 5.17%,
+    11.11% 7.01%,
+    13.33% 9.19%,
+    15.56% 11.67%,
+    17.78% 14.39%,
+    20% 17.3%,
+    22.22% 20.34%,
+    24.44% 23.46%,
+    26.67% 26.6%,
+    28.89% 29.69%,
+    31.11% 32.68%,
+    33.33% 35.5%,
+    35.56% 38.1%,
+    37.78% 40.44%,
+    40% 42.45%,
+    42.22% 44.12%,
+    44.44% 45.39%,
+    46.67% 46.26%,
+    48.89% 46.7%,
+    51.11% 46.7%,
+    53.33% 46.26%,
+    55.56% 45.39%,
+    57.78% 44.12%,
+    60% 42.45%,
+    62.22% 40.44%,
+    64.44% 38.1%,
+    66.67% 35.5%,
+    68.89% 32.68%,
+    71.11% 29.69%,
+    73.33% 26.6%,
+    75.56% 23.46%,
+    77.78% 20.34%,
+    80% 17.3%,
+    82.22% 14.39%,
+    84.44% 11.67%,
+    86.67% 9.19%,
+    88.89% 7.01%,
+    91.11% 5.17%,
+    93.33% 3.7%,
+    95.56% 2.62%,
+    97.78% 1.97%,
+    100% 1.75%
+  );
+  position: absolute;
+  bottom: 0;
+  height: 30%;
+
+  /* Radial gradient */
+  background-image: radial-gradient(
+    ellipse,
+    #5080c48f,
+    #3c60928f,
+    #2a42638f,
+    #1926388f,
+    #0308118f,
+    #0308118f,
+    #0308118f,
+    #0308118f,
+    #0308118f,
+    #0308118f,
+    #030811
+  );
+  background-position: center top; /* Umístění gradientu */
+  background-repeat: no-repeat; /* Zabránění opakování */
+  background-size: 100% 100%; /* Zmenšení gradientu na 10% šířky obrazovky */
+}
+
+.gray-layer {
+  background-color: #24282e; /* Červená barva */
+  clip-path: polygon(
+    100% 100%,
+    0% 100%,
+    0% 1.75%,
+    2.22% 1.97%,
+    4.44% 2.62%,
+    6.67% 3.7%,
+    8.89% 5.17%,
+    11.11% 7.01%,
+    13.33% 9.19%,
+    15.56% 11.67%,
+    17.78% 14.39%,
+    20% 17.3%,
+    22.22% 20.34%,
+    24.44% 23.46%,
+    26.67% 26.6%,
+    28.89% 29.69%,
+    31.11% 32.68%,
+    33.33% 35.5%,
+    35.56% 38.1%,
+    37.78% 40.44%,
+    40% 42.45%,
+    42.22% 44.12%,
+    44.44% 45.39%,
+    46.67% 46.26%,
+    48.89% 46.7%,
+    51.11% 46.7%,
+    53.33% 46.26%,
+    55.56% 45.39%,
+    57.78% 44.12%,
+    60% 42.45%,
+    62.22% 40.44%,
+    64.44% 38.1%,
+    66.67% 35.5%,
+    68.89% 32.68%,
+    71.11% 29.69%,
+    73.33% 26.6%,
+    75.56% 23.46%,
+    77.78% 20.34%,
+    80% 17.3%,
+    82.22% 14.39%,
+    84.44% 11.67%,
+    86.67% 9.19%,
+    88.89% 7.01%,
+    91.11% 5.17%,
+    93.33% 3.7%,
+    95.56% 2.62%,
+    97.78% 1.97%,
+    100% 1.75%
+  );
+  position: absolute;
+  bottom: 0; /* Umístění na spodní část */
+  height: 20%; /* Výška vrstvy */
+}
+
+.black-layer {
+  background-color: #000000; /* Červená barva */
+  clip-path: polygon(
+    100% 100%,
+    0% 100%,
+    0% 1.75%,
+    2.22% 1.97%,
+    4.44% 2.62%,
+    6.67% 3.7%,
+    8.89% 5.17%,
+    11.11% 7.01%,
+    13.33% 9.19%,
+    15.56% 11.67%,
+    17.78% 14.39%,
+    20% 17.3%,
+    22.22% 20.34%,
+    24.44% 23.46%,
+    26.67% 26.6%,
+    28.89% 29.69%,
+    31.11% 32.68%,
+    33.33% 35.5%,
+    35.56% 38.1%,
+    37.78% 40.44%,
+    40% 42.45%,
+    42.22% 44.12%,
+    44.44% 45.39%,
+    46.67% 46.26%,
+    48.89% 46.7%,
+    51.11% 46.7%,
+    53.33% 46.26%,
+    55.56% 45.39%,
+    57.78% 44.12%,
+    60% 42.45%,
+    62.22% 40.44%,
+    64.44% 38.1%,
+    66.67% 35.5%,
+    68.89% 32.68%,
+    71.11% 29.69%,
+    73.33% 26.6%,
+    75.56% 23.46%,
+    77.78% 20.34%,
+    80% 17.3%,
+    82.22% 14.39%,
+    84.44% 11.67%,
+    86.67% 9.19%,
+    88.89% 7.01%,
+    91.11% 5.17%,
+    93.33% 3.7%,
+    95.56% 2.62%,
+    97.78% 1.97%,
+    100% 1.75%
+  );
+  position: absolute;
+  bottom: 0; /* Umístění na spodní část */
+  height: 19.7%; /* Výška vrstvy */
+}
+
+.gradient-form {
+  background:
+    radial-gradient(circle at 14% 42%, #002853 1%, transparent 7%),
+    radial-gradient(circle at 70% 30%, #2b0053 0%, transparent 10%),
+    radial-gradient(circle at 88% 77%, #002853 0%, transparent 9%);
+}
+
+.gradient-hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #000000 0%, transparent 30%);
+  z-index: -2;
+}
+
+/* Univerzální gradient třída s CSS proměnnými */
+.bg-gradient {
+  background:
+    /* Gradient 1 - aktivní pouze pokud --g1-active není 0 */
+    radial-gradient(
+      circle at var(--g1-x, 12%) var(--g1-y, 15%),
+      var(--g1-color, #002853) var(--g1-size, 1%),
+      transparent calc(var(--g1-fade, 10%) * var(--g1-active, 1))
+    ),
+    /* Gradient 2 - aktivní pouze pokud --g2-active není 0 */
+      radial-gradient(
+        circle at var(--g2-x, 65%) var(--g2-y, 35%),
+        var(--g2-color, #2b0053) var(--g2-size, 0%),
+        transparent calc(var(--g2-fade, 20%) * var(--g2-active, 1))
+      ),
+    /* Gradient 3 - aktivní pouze pokud --g3-active není 0 */
+      radial-gradient(
+        circle at var(--g3-x, 85%) var(--g3-y, 67%),
+        var(--g3-color, #002853) var(--g3-size, 0%),
+        transparent calc(var(--g3-fade, 13%) * var(--g3-active, 1))
+      ),
+    /* Gradient 4 - aktivní pouze pokud --g4-active není 0 */
+      radial-gradient(
+        circle at var(--g4-x, 20%) var(--g4-y, 70%),
+        var(--g4-color, #2b0053) var(--g4-size, 0%),
+        transparent calc(var(--g4-fade, 16%) * var(--g4-active, 1))
+      ),
+    /* Lineární gradient - aktivní pouze pokud --linear-active není 0 */
+      linear-gradient(
+        to var(--linear-dir, bottom),
+        var(--linear-start, #030811) 0%,
+        transparent calc(var(--linear-end, 10%) * var(--linear-active, 1))
+      );
+}
+
+/* Předpřipravené varianty */
+.bg-gradient-1 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Používá výchozí hodnoty z .bg-gradient */
+}
+
+.bg-gradient-2 {
+  /* Pouze 2 radiální gradienty + lineární */
+  --g1-active: 1;
+  --g2-active: 1;
+  --g3-active: 0;
+  --g4-active: 0;
+  --linear-active: 1;
+
+  /* Posunuté pozice */
+  --g1-x: 25%;
+  --g1-y: 20%;
+  --g2-x: 75%;
+  --g2-y: 80%;
+}
+
+.bg-gradient-3 {
+  /* Pouze 1 radiální gradient */
+  --g1-active: 1;
+  --g2-active: 0;
+  --g3-active: 0;
+  --g4-active: 0;
+  --linear-active: 0;
+
+  /* Centrální gradient */
+  --g1-x: 50%;
+  --g1-y: 50%;
+  --g1-fade: 25%;
+}
+
+.bg-gradient-4 {
+  /* Všechny 4 radiální + diagonální lineární */
+  --g1-active: 1;
+  --g2-active: 1;
+  --g3-active: 1;
+  --g4-active: 1;
+  --linear-active: 1;
+
+  /* Diagonální lineární gradient */
+  --linear-dir: 45deg;
+  --linear-end: 15%;
+}
+
+.bg-gradient-5 {
+  /* 3 menší radiální gradienty */
+  --g1-active: 1;
+  --g2-active: 1;
+  --g3-active: 1;
+  --g4-active: 0;
+  --linear-active: 0;
+
+  /* Více menších kruhů */
+  --g1-x: 20%;
+  --g1-y: 30%;
+  --g1-fade: 12%;
+  --g2-x: 60%;
+  --g2-y: 60%;
+  --g2-fade: 15%;
+  --g3-x: 80%;
+  --g3-y: 20%;
+  --g3-fade: 10%;
+}
+
+/* Globální gradient pozadí s mnoha radiálními gradienty */
+.bg-gradient-many {
+  background:
+    radial-gradient(circle at 10% 20%, #002853 1%, transparent 8%),
+    radial-gradient(circle at 25% 5%, #2b0053 0%, transparent 12%),
+    radial-gradient(circle at 45% 15%, #001a3a 0%, transparent 10%),
+    radial-gradient(circle at 70% 10%, #2b0053 0%, transparent 15%),
+    radial-gradient(circle at 85% 25%, #002853 0%, transparent 9%),
+    radial-gradient(circle at 95% 45%, #1a0030 0%, transparent 11%),
+    radial-gradient(circle at 5% 40%, #002853 0%, transparent 13%),
+    radial-gradient(circle at 20% 55%, #2b0053 0%, transparent 8%),
+    radial-gradient(circle at 40% 70%, #001a3a 0%, transparent 14%),
+    radial-gradient(circle at 60% 80%, #2b0053 0%, transparent 10%),
+    radial-gradient(circle at 80% 75%, #002853 0%, transparent 12%),
+    radial-gradient(circle at 90% 90%, #1a0030 0%, transparent 9%),
+    radial-gradient(circle at 15% 85%, #002853 0%, transparent 11%),
+    radial-gradient(circle at 35% 95%, #2b0053 0%, transparent 13%),
+    radial-gradient(circle at 55% 25%, #001a3a 0%, transparent 7%);
+}
+
+.gradient-under-hero {
+  position: relative;
+}
+
+.gradient-under-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(to bottom, #000000 0%, transparent 30%),
+    radial-gradient(circle at 6% 40%, #002853 1%, transparent 5%),
+    radial-gradient(circle at 70% 25%, #2b0053 0%, transparent 9%),
+    radial-gradient(circle at 88% 80%, #002853 0%, transparent 8%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.laser-line {
+  position: relative;
+}
+
+.laser-line::before {
+  content: '';
+  position: absolute;
+  top: var(--line-top, 50%);
+  left: var(--line-left-override, calc(-1 * (var(--line-width, 100%) - 100%) / 2));
+  width: var(--line-width, 100%);
+  height: 4px;
+  background-color: #f97316;
+  transform: translateY(-50%) rotate(var(--line-rotate, 0deg));
+  pointer-events: none;
+  z-index: -1;
+  box-shadow:
+    0 0 10px #f97316,
+    0 0 20px #f97316,
+    0 0 40px rgba(249, 115, 22, 1),
+    0 0 60px rgba(249, 115, 22, 1);
+}
+
+.strikethrough {
+  position: relative;
+  display: inline-block;
+}
+
+.strikethrough::after {
+  content: '';
+  position: absolute;
+  left: -1%;
+  right: -10%;
+  height: 3px;
+  background-color: #fff;
+  transform-origin: center;
+  box-shadow:
+    0 0 10px rgb(255, 255, 255),
+    0 0 20px rgba(255, 255, 255, 1),
+    0 0 40px rgba(255, 255, 255, 1),
+    0 0 60px rgba(255, 255, 255, 0.8),
+    0 0 80px rgba(255, 255, 255, 0.6);
+  top: 50%;
+}
+
+/* ArrowDown animace */
+@keyframes arrow-animate {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.arrow-container {
+  display: block;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translate(-50%, 0) rotateZ(0deg);
+  transition: transform 0.4s ease;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.arrow-container:hover {
+  transform: translate(-50%, -10px) rotateZ(0deg);
+}
+
+.arrow-container:hover .arrow-down {
+  top: 50%;
+  animation-play-state: paused;
+  opacity: 1 !important;
+}
+
+.arrow-container:hover .arrow-down:before {
+  transform: translate(-50%, -50%) rotateZ(-30deg);
+}
+
+.arrow-container:hover .arrow-down:after {
+  transform: translate(-50%, -50%) rotateZ(30deg);
+}
+
+.arrow-down {
+  position: absolute;
+  left: 50%;
+  transition: all 0.4s ease;
+  animation: arrow-animate 2s infinite;
+  opacity: 0;
+}
+
+.arrow-down:before,
+.arrow-down:after {
+  transition: all 0.4s ease;
+  content: '';
+  display: block;
+  position: absolute;
+  transform-origin: bottom right;
+  background: #fff;
+  width: 4px;
+  height: 50px;
+  border-radius: 10px;
+  transform: translate(-50%, -50%) rotateZ(-45deg);
+}
+
+.arrow-down:after {
+  transform-origin: bottom left;
+  transform: translate(-50%, -50%) rotateZ(45deg);
+}
+
+.arrow-down:nth-child(1) {
+  top: 15%;
+}
+
+.arrow-down:nth-child(2) {
+  top: 30%;
+}
+
+.arrow-down:nth-child(3) {
+  top: 45%;
+}
+/* Timeline */
+.timeline {
+  position: relative;
+  background-image: linear-gradient(
+    to bottom,
+    #030811,
+    #0a111b,
+    #0e1724,
+    #111c2d,
+    #132237,
+    #172d4c,
+    #1c3961,
+    #284d76,
+    #4176a0,
+    #73a0b0,
+    #ecffff
+  );
+  width: 62px;
+  text-align: center;
+  transition: all 0.3s;
+}
+@media screen and (max-width: 768px) {
+  .timeline {
+    margin: 0 0 0 0px;
+  }
+}
+@media screen and (min-width: 769px) {
+  .timeline {
+    margin: 0 auto;
+  }
+}
+
+.timeline-wrapper {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.timeline-background {
+  position: fixed; /* Pozadí je fixní pouze v rámci této komponenty */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Pozadí pokrývá celou viditelnou část */
+  background-image: url('/Textura2.jpg'); /* Vaše pozadí */
+  background-repeat: repeat; /* Opakování obrázku */
+  background-size: auto; /* Zachování velikosti obrázku */
+  background-position: top left; /* Umístění pozadí */
+  background-color: rgba(0, 0, 0, 0.8); /* Přidání tmavé vrstvy */
+  background-blend-mode: multiply; /* Směšovací režim */
+  z-index: -1; /* Zajišťuje, že je pozadí pod obsahem */
+}
+
+.timeline-content {
+  position: relative; /* Obsah je relativní k wrapperu */
+  z-index: 1; /* Obsah je nad pozadím */
+  padding-top: 100vh; /* Posun obsahu pod fixní pozadí */
+}
+
+.timeline .point .year {
+  padding-top: 10px;
+  color: #ffffff;
+  position: relative; /* Position relative to establish a new stacking context */
+  z-index: 20; /* Higher than the .bocata elements' z-index of 10 */
+}
+.timeline .point .bocata {
+  position: relative;
+  background-color: rgb(255, 252, 252);
+  color: #000;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: all 0.3s;
+}
+@media screen and (max-width: 320px) {
+  .timeline .point .bocata {
+    width: 150px;
+  }
+  .timeline .point .bocata.little {
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .timeline .point .bocata {
+    width: 254px;
+  }
+  .timeline .point .bocata.little {
+    width: 224px;
+  }
+}
+
+@media screen and (min-width: 425px) and (max-width: 576px) {
+  .timeline .point .bocata {
+    width: 270px;
+  }
+  .timeline .point .bocata.little {
+    width: 250px;
+  }
+}
+
+@media screen and (min-width: 577px) {
+  .timeline .point .bocata {
+    width: 300px;
+  }
+  .timeline .point .bocata.little {
+    width: 250px;
+  }
+}
+.timeline .point .bocata + .bocata {
+  margin-top: 35px;
+}
+.timeline .point:nth-child(odd) .bocata {
+  box-shadow: -6px 10px 20px -20px #4a4a4a;
+  left: 100px;
+  position: relative;
+  z-index: 10;
+}
+.timeline .point:nth-child(odd) .bocata::after {
+  content: '';
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  z-index: 10;
+  border: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  margin-top: -10px;
+  top: 50%;
+  border-right: 10px solid #ffffff;
+  left: -10px;
+}
+.timeline .point:nth-child(even) .bocata {
+  box-shadow: 6px 10px 20px -20px #4a4a4a;
+}
+@media screen and (max-width: 768px) {
+  .timeline .point:nth-child(even) .bocata {
+    left: 100px;
+    position: relative;
+    z-index: 10;
+  }
+  .timeline .point:nth-child(even) .bocata::after {
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    z-index: 10;
+    border: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin-top: -10px;
+    top: 50%;
+    border-right: 10px solid #ffffff;
+    left: -10px;
+  }
+}
+@media screen and (min-width: 769px) {
+  .timeline .point:nth-child(even) .bocata {
+    right: 340px;
+    position: relative;
+    z-index: 10;
+  }
+}
+@media screen and (min-width: 769px) and (min-width: 769px) {
+  .timeline .point:nth-child(even) .bocata.little {
+    right: 275px;
+  }
+}
+@media screen and (min-width: 769px) {
+  .timeline .point:nth-child(even) .bocata::after {
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    z-index: 10;
+    border: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin-top: -10px;
+    top: 50%;
+    border-left: 10px solid #ffffff;
+    left: auto;
+    right: -10px;
+  }
+}
+.timeline .point .arrow {
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 20px;
+  transform: rotate(45deg);
+}
+.timeline .point:first-child .arrow,
+.timeline .point:last-child .arrow {
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 20px;
+  transform: rotate(45deg);
+}
+.timeline .point .arrow-clean {
+  border: solid #020202;
+  border-width: 0 25px 25px 0;
+  display: inline-block;
+  padding: 25px;
+  position: absolute;
+  left: -7px;
+  bottom: -18px;
+  transform: rotate(45deg);
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1.28px;
+}
+
+.timeline .point {
+  margin-bottom: 50px; /* Add space between points */
+}
+
+@media screen and (min-width: 1280px) {
+  .timeline .point .bocata {
+    width: 450px;
+  }
+  .timeline .point .bocata.little {
+    width: 450px;
+  }
+  .timeline .point:nth-child(2n) .bocata {
+    right: 488px;
+    position: relative;
+    z-index: 10;
+  }
+}
+
+/* Portfolio lightbox animace */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Burger menu animace pro SplitModal */
+.burger-icon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  margin: -12px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.bar {
+  width: 35px;
+  height: 4px;
+  background-color: white;
+  border-radius: 2px;
+  transform-origin: center;
+  transition:
+    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* Hover efekt na aktivní ikonu - vylepšení X */
+.burger-icon.active:hover .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-6px, 5px) scale(1.1);
+  background-color: #f97316;
+}
+
+.burger-icon.active:hover .bar:nth-child(2) {
+  opacity: 0;
+  transform: rotate(0) translate(0px, 30px) scale(0.5);
+}
+
+.burger-icon.active:hover .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-8px, -9px) scale(1.1);
+  background-color: #f97316;
+}
+
+.burger-icon.active .bar {
+  background-color: #f97316; /* Nastaví barvu oranžovou (#f97316) při aktivním stavu */
+}
+
+.burger-icon.active .bar:nth-child(1) {
+  transform: rotate(-60deg) translate(-10px, -9px); /* Úpravy dle potřeby */
+}
+
+.burger-icon.active .bar:nth-child(2) {
+  transform: rotate(0) translate(0px, 18px); /* Úpravy dle potřeby */
+}
+
+.burger-icon.active .bar:nth-child(3) {
+  transform: rotate(60deg) translate(-7px, -19px); /* Skryjeme prostřední pruh */
+}
+
+/* Glitch Text Effect */
+.glitch {
+  white-space: nowrap;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+}
+
+.glitch::after,
+.glitch::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.glitch:not(.enable-on-hover)::after {
+  transform: translateX(0.3em);
+  text-shadow: var(--after-shadow, -0.2em 0 red);
+  animation: animate-glitch var(--after-duration, 3s) infinite linear alternate-reverse;
+}
+.glitch:not(.enable-on-hover)::before {
+  transform: translateX(-0.3em);
+  text-shadow: var(--before-shadow, 0.2em 0 cyan);
+  animation: animate-glitch var(--before-duration, 2s) infinite linear alternate-reverse;
+}
+
+.glitch.enable-on-hover::after,
+.glitch.enable-on-hover::before {
+  content: '';
+  opacity: 0;
+  animation: none;
+}
+
+.glitch.enable-on-hover:hover::after {
+  content: attr(data-text);
+  opacity: 1;
+  transform: translateX(0.3em);
+  text-shadow: var(--after-shadow, -0.2em 0 red);
+  animation: animate-glitch var(--after-duration, 3s) infinite linear alternate-reverse;
+}
+.glitch.enable-on-hover:hover::before {
+  content: attr(data-text);
+  opacity: 1;
+  transform: translateX(-0.3em);
+  text-shadow: var(--before-shadow, 0.2em 0 cyan);
+  animation: animate-glitch var(--before-duration, 2s) infinite linear alternate-reverse;
+}
+
+@keyframes animate-glitch {
+  0% {
+    clip-path: inset(20% 0 50% 0);
+  }
+  5% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  10% {
+    clip-path: inset(15% 0 55% 0);
+  }
+  15% {
+    clip-path: inset(25% 0 35% 0);
+  }
+  20% {
+    clip-path: inset(30% 0 40% 0);
+  }
+  25% {
+    clip-path: inset(40% 0 20% 0);
+  }
+  30% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  35% {
+    clip-path: inset(15% 0 55% 0);
+  }
+  40% {
+    clip-path: inset(25% 0 35% 0);
+  }
+  45% {
+    clip-path: inset(30% 0 40% 0);
+  }
+  50% {
+    clip-path: inset(20% 0 50% 0);
+  }
+  55% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  60% {
+    clip-path: inset(15% 0 55% 0);
+  }
+  65% {
+    clip-path: inset(25% 0 35% 0);
+  }
+  70% {
+    clip-path: inset(30% 0 40% 0);
+  }
+  75% {
+    clip-path: inset(40% 0 20% 0);
+  }
+  80% {
+    clip-path: inset(20% 0 50% 0);
+  }
+  85% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  90% {
+    clip-path: inset(15% 0 55% 0);
+  }
+  95% {
+    clip-path: inset(25% 0 35% 0);
+  }
+  100% {
+    clip-path: inset(30% 0 40% 0);
+  }
+}
+
+/* Magic Bento Card Effects */
+.magic-bento-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(4px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+/* Magic Bento Card with Cursor Effect */
+.magic-bento-card-cursor {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(4px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.magic-bento-card-cursor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.15) 0%,
+    rgba(59, 130, 246, 0.1) 50%,
+    rgba(16, 185, 129, 0.05) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.magic-bento-card-cursor::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 0.75rem;
+  background: radial-gradient(
+    200px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+    rgba(139, 92, 246, 0.8) 0%,
+    rgba(59, 130, 246, 0.6) 15%,
+    rgba(16, 185, 129, 0.4) 30%,
+    transparent 60%
+  );
+  opacity: var(--opacity, 0);
+  z-index: -1;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.magic-bento-card-cursor:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(139, 92, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.magic-bento-card-cursor:hover::before {
+  opacity: 1;
+}
+
+.magic-bento-card-cursor:hover .magic-bento-content {
+  transform: translateY(-4px);
+}
+
+.magic-bento-card-cursor:hover .magic-bento-icon {
+  transform: scale(1.15) rotate(5deg);
+  filter: brightness(1.2) drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));
+}
+
+.magic-bento-card-cursor:hover .magic-bento-title {
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+.magic-bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.15) 0%,
+    rgba(59, 130, 246, 0.1) 50%,
+    rgba(16, 185, 129, 0.05) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.magic-bento-card::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 0.75rem;
+  background: radial-gradient(
+    200px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+    rgba(139, 92, 246, 0.8) 0%,
+    rgba(59, 130, 246, 0.6) 15%,
+    rgba(16, 185, 129, 0.4) 30%,
+    transparent 60%
+  );
+  opacity: var(--opacity, 0);
+  z-index: -1;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.magic-bento-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(139, 92, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.magic-bento-card:hover::before {
+  opacity: 1;
+}
+
+.magic-bento-card:hover .magic-bento-content {
+  transform: translateY(-4px);
+}
+
+.magic-bento-card:hover .magic-bento-icon {
+  transform: scale(1.15) rotate(5deg);
+  filter: brightness(1.2) drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));
+}
+
+.magic-bento-card:hover .magic-bento-title {
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+.magic-bento-content {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.magic-bento-icon {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+}
+
+.magic-bento-title {
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.magic-bento-text {
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+/* Accessibility - respektování prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Zachování polohy ale bez animací */
+  .glitch::before,
+  .glitch::after {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  /* Vypnutí Magic Bento animací */
+  .magic-bento-card,
+  .magic-bento-card::before,
+  .magic-bento-content,
+  .magic-bento-icon,
+  .magic-bento-title {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

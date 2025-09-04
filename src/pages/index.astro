@@ -1,11 +1,22 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import Hero from '../components/hero/Hero.astro';
+import Services from '../components/services/Services.astro';
+import Reasons from '../components/reasons/Reasons.astro';
+import TechStack from '../components/techStack/TechStack.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Timeline from '../components/Timeline.astro';
+import References from '../components/references/References.astro';
+import Contact from '../components/form/Contact.astro';
+import Portfolio from '../components/Portfolio.astro';
 ---
 
 <Layout>
-	<Welcome />
+  <Hero />
+  <Services />
+  <Reasons />
+  <TechStack />
+  <Timeline />
+  <References />
+  <Portfolio />
+  <Contact />
 </Layout>

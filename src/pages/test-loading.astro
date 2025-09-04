@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PortraitImage from '../components/hero/PortraitImage.astro';
+---
+
+<Layout>
+  <div class="bg-black min-h-screen relative overflow-hidden">
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold mb-8 text-white">Test Loading Efektů</h1>
+
+      <div class="bg-gray-900 p-6 rounded-lg mb-8">
+        <h2 class="text-xl font-semibold mb-4 text-white">Současné parametry GridDistortion:</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div class="bg-gray-800 p-4 rounded">
+            <h3 class="font-semibold text-blue-400 mb-2">🌫️ FadeContent Parametry:</h3>
+            <ul class="space-y-1 text-gray-300">
+              <li>⏳ <strong>delay:</strong> 1000ms</li>
+              <li>⏱️ <strong>duration:</strong> 2000ms</li>
+              <li>🌫️ <strong>blur:</strong> true</li>
+              <li>📊 <strong>Celkem:</strong> 3000ms</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-800 p-4 rounded">
+            <h3 class="font-semibold text-red-400 mb-2">🔥 Loading (EXTRÉMNÍ):</h3>
+            <ul class="space-y-1 text-gray-300">
+              <li>🕐 <strong>duration:</strong> 2000ms</li>
+              <li>💥 <strong>strength:</strong> 1.2</li>
+              <li>⚡ <strong>speed:</strong> 12</li>
+              <li>💀 <strong>pattern:</strong> chaos</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-800 p-4 rounded">
+            <h3 class="font-semibold text-green-400 mb-2">🖱️ Hover (JEMNÉ):</h3>
+            <ul class="space-y-1 text-gray-300">
+              <li>🎯 <strong>mouse:</strong> 0.1</li>
+              <li>💨 <strong>strength:</strong> 0.2</li>
+              <li>🔄 <strong>relaxation:</strong> 0.5</li>
+              <li>🎨 <strong>grid:</strong> 15</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-4 p-4 bg-purple-900 rounded">
+          <h3 class="font-semibold text-purple-200 mb-2">
+            ✨ FadeContent + GridDistortion (Bez clip-path)!
+          </h3>
+          <p class="text-purple-100 text-sm">
+            <strong>Timeline:</strong> 1s delay → 2s fade-in s blur → současně běží 2s loading chaos
+            → pak jemný hover<br />
+            <strong>📐 Aktuální:</strong> Standardní obdélníkový tvar (bez polygon clip-path)
+          </p>
+        </div>
+
+        <div class="mt-4">
+          <h3 class="font-semibold text-yellow-400 mb-2">🔄 Jak otestovat:</h3>
+          <ol class="list-decimal list-inside space-y-1 text-gray-300 text-sm">
+            <li>Obnovte stránku (F5) nebo přejděte na hlavní stránku</li>
+            <li><strong>0-1s:</strong> Nic (delay)</li>
+            <li><strong>1-3s:</strong> Fade-in s blur + extrémní chaos GridDistortion</li>
+            <li><strong>3s+:</strong> Plně viditelný obrázek s jemným hover efektem</li>
+            <li>Najeďte myší na obrázek = jemná distortion v celé oblasti</li>
+          </ol>
+
+          <div class="mt-4 p-4 bg-gray-800 rounded">
+            <h4 class="font-semibold text-green-400 mb-2">📐 Standardní Obdélníkový Tvar:</h4>
+            <div class="text-xs text-gray-300">
+              <p><strong>Aktuální stav:</strong></p>
+              <ul class="list-disc list-inside space-y-1 mt-2">
+                <li>Žádný clip-path polygon</li>
+                <li>Standardní obdélníkový tvar obrázku</li>
+                <li>Všechny GridDistortion efekty fungují v celé oblasti</li>
+                <li>Jednoduchý, čistý vzhled</li>
+              </ul>
+
+              <div class="mt-3 p-2 bg-gray-700 rounded">
+                <p class="text-yellow-300"><strong>Pokud chcete přidat clip-path:</strong></p>
+                <ul class="list-disc list-inside space-y-1 mt-1">
+                  <li><strong>Kruh:</strong> <code>circle(50% at 50% 50%)</code></li>
+                  <li><strong>Elipse:</strong> <code>ellipse(60% 80% at 50% 50%)</code></li>
+                  <li>
+                    <strong>Půloblouk dole:</strong>
+                    <code>ellipse(100% 50% at 50% 100%)</code>
+                  </li>
+                  <li>
+                    <strong>Půloblouk nahoře:</strong>
+                    <code>ellipse(100% 50% at 50% 0%)</code>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a
+          href="/"
+          class="inline-block bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors"
+        >
+          🏠 Přejít na hlavní stránku a otestovat
+        </a>
+      </div>
+    </div>
+
+    <!-- Ukázka PortraitImage pro přímé testování -->
+    <div class="fixed inset-0 pointer-events-none">
+      <PortraitImage />
+    </div>
+  </div>
+</Layout>

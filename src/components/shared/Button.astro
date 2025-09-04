@@ -1,0 +1,120 @@
+---
+export interface Props {
+  text: string;
+  href?: string;
+  variant?: 'ghost' | 'solid';
+  class?: string;
+  onClick?: string;
+}
+
+const { text, href, variant = 'ghost', class: className = '', onClick } = Astro.props;
+
+const isGhost = variant === 'ghost';
+const containerClass = isGhost ? 'ghost-button-container' : 'solid-button-container';
+const maskClass = isGhost ? 'ghost-mas' : 'solid-mas';
+---
+
+{
+  href ? (
+    <div class={`${containerClass} justify-center text-center ${className}`}>
+      <span class={`${maskClass} justify-center text-center text-lg`}>{text}</span>
+      <a
+        href={href}
+        class={`block w-full rounded-lg px-4 py-2 font-bold justify-center text-center text-lg min-h-[50px] ${className}`}
+        onclick={onClick}
+      >
+        {text}
+      </a>
+    </div>
+  ) : (
+    <div class={`${containerClass} justify-center text-center ${className}`}>
+      <span class={`${maskClass} justify-center text-center text-lg`}>{text}</span>
+      <button
+        type="button"
+        name="Hover"
+        class={`w-full rounded-lg px-4 py-2 font-bold justify-center text-center text-lg min-h-[50px] ${className}`}
+        onclick={onClick}
+      >
+        {text}
+      </button>
+    </div>
+  )
+}
+
+<style>
+  /* Solid button styly */
+  .solid-button-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .solid-button-container button,
+  .solid-button-container a {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    background: #f97316;
+    -webkit-mask: url('/images/shared/urban-sprite.webp');
+    mask: url('/images/shared/urban-sprite.webp');
+    -webkit-mask-size: 3000% 100%;
+    mask-size: 3000% 100%;
+    color: #fff;
+    -webkit-animation: ani2 0.7s steps(29) forwards;
+    animation: ani2 0.7s steps(29) forwards;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .solid-button-container button:hover,
+  .solid-button-container a:hover,
+  .solid-button-container.active button,
+  .solid-button-container.active a {
+    -webkit-animation: ani 0.7s steps(29) forwards;
+    animation: ani 0.7s steps(29) forwards;
+  }
+
+  .solid-mas {
+    position: absolute;
+    color: #fff;
+    width: 100%;
+    overflow: hidden;
+    font-weight: bold;
+    border: 1px solid #f97316;
+    padding: 12px 24px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  /* Keyframes pro sprite animace */
+  @keyframes ani {
+    from {
+      -webkit-mask-position: 0% 0;
+      mask-position: 0% 0;
+    }
+    to {
+      -webkit-mask-position: 100% 0;
+      mask-position: 100% 0;
+    }
+  }
+
+  @keyframes ani2 {
+    from {
+      -webkit-mask-position: 100% 0;
+      mask-position: 100% 0;
+    }
+    to {
+      -webkit-mask-position: 0% 0;
+      mask-position: 0% 0;
+    }
+  }
+</style>

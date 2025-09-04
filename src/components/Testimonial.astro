@@ -1,0 +1,162 @@
+---
+import TestimonialMagicEffects from './react/testimonials/TestimonialMagicEffects';
+
+const testimonials = [
+  {
+    logo: '/logos/Cak-logo.svg',
+    logoWidth: 32,
+    title: 'ČESKÁ ASOCIACE KICKBOXU',
+    description:
+      'Vojtěch nám již v minulosti skvěle pomohl s komplexním problémem zavirovaného webu. Díky novému webu je naše komunikace s oddíly mnohem jednodušší a zautomatizoval dříve manuální procesy, čímž nám ušetřil mnoho času. Spolupráce byla vždy naprosto bezproblémová. Rozhodně doporučujeme!',
+  },
+  {
+    logo: '/logos/Nubis-logo-140w.webp',
+    logoWidth: 14,
+    title: 'Nubis',
+    description:
+      'Implementace nové aplikace znamenala revoluci v našich procesech. Dosáhli jsme neuvěřitelného 7000% zefektivnění oproti původnímu stavu. Investice, která se okamžitě vrátila.',
+  },
+  {
+    logo: '/logos/Navozto-logo-130w.webp',
+    logoWidth: 14,
+    title: 'Navoz.to',
+    description:
+      'Na této spolupráci oceňujeme především spolehlivost, rychlé reakce a všestrannost. Ať už potřebujeme řešit webové stránky nebo IT podporu, vždy se můžeme spolehnout na profesionální přístup a efektivní řešení.',
+  },
+];
+---
+
+<div class="bg-gradient">
+  <div id="reference" class="container mx-auto px-4 py-16">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:justify-items-center">
+      {
+        testimonials.map((testimonial, index) => (
+          <div
+            class="testimonial-card relative flex min-h-[350px] h-auto w-full max-w-md flex-col items-center justify-between gap-4 rounded-lg p-6 text-center text-white"
+            data-delay={index * 0.2}
+          >
+            <div class="flex flex-col items-center w-full">
+              {testimonial.logo && (
+                <div
+                  class="relative mb-4 h-16 flex items-center justify-center"
+                  style={`width: ${testimonial.logoWidth}rem`}
+                >
+                  <img
+                    src={testimonial.logo}
+                    alt={`Logo ${index + 1}`}
+                    class="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <h3
+                class="text-2xl font-bold break-words hyphens-auto leading-tight w-full px-2"
+                lang="cs"
+                style="word-break: break-word; overflow-wrap: break-word;"
+              >
+                {testimonial.title}
+              </h3>
+            </div>
+            <div class="relative z-10 mb-4 flex-1 flex items-center">
+              <p class="mt-2 text-lg leading-relaxed break-words hyphens-auto" lang="cs">
+                {testimonial.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Magic Effects Component -->
+    <TestimonialMagicEffects
+      enableStars={true}
+      enableSpotlight={true}
+      enableBorderGlow={true}
+      enableTilt={true}
+      enableMagnetism={true}
+      clickEffect={true}
+      spotlightRadius={300}
+      particleCount={12}
+      glowColor="132, 0, 255"
+      client:idle
+    />
+  </div>
+</div>
+
+<style>
+  @keyframes fadeInSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .testimonial-card {
+    opacity: 0;
+    animation: fadeInSlideUp 0.6s ease-out forwards;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background-color: transparent;
+    backdrop-filter: blur(4px);
+    border-radius: 1rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .testimonial-card:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow:
+      0 4px 20px rgba(46, 24, 78, 0.4),
+      0 0 30px rgba(132, 0, 255, 0.2);
+  }
+
+  .testimonial-card:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .testimonial-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .testimonial-card:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  /* Pro větší počet karet */
+  .testimonial-card:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+
+  .testimonial-card:nth-child(5) {
+    animation-delay: 0.8s;
+  }
+
+  .testimonial-card:nth-child(6) {
+    animation-delay: 1s;
+  }
+
+  /* Gradient nastavení */
+  .bg-gradient {
+    /* Pouze 2 radiální gradienty */
+    --g1-active: 1;
+    --g2-active: 1;
+    --g3-active: 0;
+    --g4-active: 0;
+    --linear-active: 0;
+
+    /* Pozice 2 gradientů */
+    --g1-x: 15%;
+    --g1-y: 30%;
+    --g1-color: #002853;
+    --g1-size: 1%;
+    --g1-fade: min(10%, 190px);
+
+    --g2-x: 60%;
+    --g2-y: 65%;
+    --g2-color: #2b0053;
+    --g2-size: 0%;
+    --g2-fade: min(13%, 200px);
+  }
+</style>
